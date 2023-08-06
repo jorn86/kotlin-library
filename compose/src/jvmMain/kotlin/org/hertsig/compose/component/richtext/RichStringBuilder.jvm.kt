@@ -1,4 +1,4 @@
-package org.hertsig.compose.component
+package org.hertsig.compose.component.richtext
 
 import androidx.compose.ui.text.SpanStyle
 import java.awt.Desktop

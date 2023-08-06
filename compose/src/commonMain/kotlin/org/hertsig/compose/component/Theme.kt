@@ -4,6 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import org.hertsig.compose.Content
 
 @Composable
 fun Theme(
@@ -11,7 +12,7 @@ fun Theme(
     darkColors: Colors = darkColors(),
     typography: Typography = Typography(),
     shapes: Shapes = Shapes(),
-    content: @Composable () -> Unit
+    content: Content
 ) {
     Theme(if (isSystemInDarkTheme()) darkColors else lightColors, typography, shapes, content)
 }
@@ -21,7 +22,7 @@ fun Theme(
     colors: Colors = lightColors(),
     typography: Typography = Typography(),
     shapes: Shapes = Shapes(),
-    content: @Composable () -> Unit
+    content: Content
 ) {
     MaterialTheme(colors, typography, shapes) {
         CompositionLocalProvider(

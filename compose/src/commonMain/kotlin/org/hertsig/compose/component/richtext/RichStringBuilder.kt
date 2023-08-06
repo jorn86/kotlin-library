@@ -1,4 +1,4 @@
-package org.hertsig.compose.component
+package org.hertsig.compose.component.richtext
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.InlineTextContent
@@ -7,20 +7,18 @@ import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.*
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.TextUnit
-import org.hertsig.compose.append
-import org.hertsig.compose.build
-import org.hertsig.compose.dpToSp
-import org.hertsig.compose.inlineText
+import org.hertsig.compose.*
 import org.hertsig.util.putFirst
 
+val LINK_STYLE = SpanStyle(Color.Blue, textDecoration = TextDecoration.Underline)
 internal val CLICKABLE_TAG = RichStringBuilder::class.qualifiedName + "-clickable"
 internal val TOOLTIP_TAG = RichStringBuilder::class.qualifiedName + "-tooltip"
-
-typealias Content = @Composable () -> Unit
 
 @Composable
 fun rememberRichString(vararg keys: Any, builder: RichStringBuilder.() -> Unit) = remember(*keys) {
@@ -67,11 +65,20 @@ open class RichStringBuilder {
         return this
     }
 
+    @Composable
+    fun icon(
+        icon: Painter,
+        size: DpSize,
+        id: String,
+        modifier: Modifier = Modifier,
+        description: String = id,
+    ) = inline(id, size.width.dpToSp(), size.height.dpToSp(), PlaceholderVerticalAlign.Center) {
+        Icon(icon, description, Modifier.size(size).then(modifier))
+    }
+
     fun withClickable(id: String, action: () -> Unit, content: RichStringBuilder.() -> Unit): RichStringBuilder {
         clickables.putFirst(id, action)
-        builder.withAnnotation(CLICKABLE_TAG, id) {
-            content()
-        }
+        builder.withAnnotation(CLICKABLE_TAG, id) { content() }
         return this
     }
 
@@ -84,25 +91,12 @@ open class RichStringBuilder {
         content: RichStringBuilder.() -> Unit,
     ): RichStringBuilder {
         tooltips.putFirst(id, tooltip)
-        builder.withAnnotation(TOOLTIP_TAG, id) {
-            content()
-        }
+        builder.withAnnotation(TOOLTIP_TAG, id) { content() }
         return this
     }
 
     fun tooltipText(text: String, id: String, style: SpanStyle = SpanStyle(), tooltip: Tooltip) =
         withTooltip(id, tooltip) { append(text, style) }
-
-    @Composable
-    fun icon(
-        icon: Painter,
-        size: DpSize,
-        id: String,
-        modifier: Modifier = Modifier,
-        description: String = id,
-    ) = inline(id, size.width.dpToSp(), size.height.dpToSp(), PlaceholderVerticalAlign.Center) {
-        Icon(icon, description, Modifier.size(size).then(modifier))
-    }
 
     fun build() = RichString(builder.build(), inline, clickables, tooltips)
 }

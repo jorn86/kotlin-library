@@ -6,12 +6,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.hertsig.compose.Content
 
 data class TabBuilder(
-    val title: @Composable () -> Unit,
-    val content: @Composable () -> Unit,
+    val title: Content,
+    val content: Content,
 ) {
-    constructor(name: String, content: @Composable () -> Unit): this({ TextLine(name) }, content)
+    constructor(name: String, content: Content): this({ TextLine(name) }, content)
 }
 
 @Composable

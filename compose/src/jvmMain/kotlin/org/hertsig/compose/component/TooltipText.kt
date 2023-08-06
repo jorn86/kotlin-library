@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.hertsig.compose.Content
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -19,7 +20,7 @@ fun TooltipText(
     text: String,
     contentModifier: Modifier = Modifier,
     tooltipModifier: Modifier = tooltipModifier(),
-    content: @Composable () -> Unit
+    content: Content
 ) {
     TooltipArea({ Text(text, tooltipModifier) }, contentModifier, content = content)
 }

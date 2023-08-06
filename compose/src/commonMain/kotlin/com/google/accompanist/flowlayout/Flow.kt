@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.unit.*
+import org.hertsig.compose.Content
 import kotlin.math.max
 
 /**
@@ -88,7 +89,7 @@ public fun FlowColumn(
     crossAxisAlignment: FlowCrossAxisAlignment = FlowCrossAxisAlignment.Start,
     crossAxisSpacing: Dp = 0.dp,
     lastLineMainAxisAlignment: FlowMainAxisAlignment = mainAxisAlignment,
-    content: @Composable () -> Unit
+    content: Content
 ) {
     Flow(
         modifier = modifier,
@@ -136,7 +137,7 @@ private fun Flow(
     crossAxisAlignment: FlowCrossAxisAlignment,
     crossAxisSpacing: Dp,
     lastLineMainAxisAlignment: FlowMainAxisAlignment,
-    content: @Composable () -> Unit
+    content: Content
 ) {
     fun Placeable.mainAxisSize() =
         if (orientation == LayoutOrientation.Horizontal) width else height

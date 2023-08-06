@@ -8,6 +8,7 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.hertsig.compose.Content
 import org.hertsig.compose.component.ScrollableColumn
 
 @Composable
@@ -18,7 +19,7 @@ fun ScrollableFlowColumn(
     columns: Int = 2,
     modifier: Modifier = Modifier,
     state: LazyListState = rememberLazyListState(),
-    content: @Composable () -> Unit
+    content: Content
 ) {
     ScrollableColumn(modifier, state = state) {
         item {

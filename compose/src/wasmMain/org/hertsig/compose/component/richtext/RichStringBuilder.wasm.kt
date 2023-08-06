@@ -1,4 +1,4 @@
-package org.hertsig.compose.component
+package org.hertsig.compose.component.richtext
 
 // let's see if this compiles when we actually enable this source set again
 
