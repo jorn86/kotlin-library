@@ -1,5 +1,6 @@
 package org.hertsig.compose.component
 
+import androidx.compose.material.DropdownMenu
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -27,7 +28,7 @@ fun <V> DropdownMenu(
     itemAlign: TextAlign = TextAlign.Start,
     onUpdate: (V) -> Unit
 ) {
-    androidx.compose.material3.DropdownMenu(visible, onDismiss) {
+    DropdownMenu(visible, onDismiss) {
         values.forEach { Item(display(it), itemAlign) { onUpdate(it) } }
     }
 }
