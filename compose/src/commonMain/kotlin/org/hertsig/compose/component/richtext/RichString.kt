@@ -8,4 +8,6 @@ open class RichString internal constructor(
     val inlineContent: Map<String, InlineTextContent>,
     val clickables: Map<String, () -> Unit>,
     val tooltips: Map<String, Tooltip>,
-)
+) {
+    override fun toString() = "RichString[$annotatedString]"
+}

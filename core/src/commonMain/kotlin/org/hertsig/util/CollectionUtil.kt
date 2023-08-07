@@ -7,3 +7,15 @@ fun <K, V> MutableMap<K, V>.putFirst(key: K, value: V) {
     require(!containsKey(key)) { "Duplicate key $key" }
     put(key, value)
 }
+
+/** As distinctBy from the stdlib, but keeps the last value for each key instead of the first one */
+fun <T,K> Collection<T>.distinctByKeepLast(selector: (T) -> K): Collection<T> {
+    val results = LinkedHashMap<K, T>()
+    forEach {
+        results[selector(it)] = it
+    }
+    return results.values
+}
+
+/** As subList but with sensible defaults and supports Python-style "all except" for the end parameter */
+fun <T> List<T>.sub(start: Int = 0, end: Int = size) = subList(start, if (end < 0) end + size else end)

@@ -1,8 +1,10 @@
 package org.hertsig.dnd.dice
 
+import org.hertsig.util.sub
+
 data class MultiDice(val main: Dice, val extra: List<Dice>) {
     constructor(main:Dice, vararg other: Dice): this(main, other.toList())
-    constructor(all: List<Dice>): this(all.first(), all.subList(1, all.size))
+    constructor(all: List<Dice>): this(all.first(), all.sub(1))
 
     val average get() = main.average + extra.sumOf { it.average }
     private val all get() = listOf(main) + extra

@@ -8,10 +8,15 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.*
+import androidx.compose.ui.input.pointer.PointerEvent
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.text.*
 import androidx.compose.ui.window.Popup
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.hertsig.compose.build
 import org.hertsig.compose.pointerInputAsync
 
@@ -30,7 +35,7 @@ fun RichText(
             text = if (hovered.isEmpty()) {
                 content.annotatedString
             } else {
-                text.copyWith {
+                content.annotatedString.copyWith {
                     addStyle(SpanStyle(background = clickableHoverColor), hovered.first, hovered.last)
                 }
             }
@@ -65,7 +70,8 @@ private fun Modifier.clickablesPointerInput(
     onHoverClickable: (IntRange) -> Unit,
 ) = pointerInputAsync(content) {
     detectTapGestures { pos ->
-        content.clickables[getAnnotationFromCursorPosition(CLICKABLE_TAG, pos)?.item]?.invoke()
+        val annotation = getAnnotationFromCursorPosition(CLICKABLE_TAG, pos)
+        content.clickables[annotation?.item]?.invoke()
     }
 }.onPointerEvent(PointerEventType.Move) {
     val annotation = getAnnotationFromCursorPosition(CLICKABLE_TAG, it.position)
@@ -87,16 +93,16 @@ private fun Modifier.tooltipsPointerInput(
     }
 
     tooltipState.active?.let { tooltip ->
-        Popup(tooltip.positionProvider, onDismissRequest = { tooltipState.onHover(null) }) {
+        Popup(tooltip.positionProvider, onDismissRequest = { tooltipState.clear() }) {
             Box(tooltip.modifier
                 // Not needed, but if popups get stuck you can remove them by pointing at them
-                .onPointerEvent(PointerEventType.Enter) { tooltipState.onHover(null) }
+                .onPointerEvent(PointerEventType.Enter) { tooltipState.clear() }
             ) { tooltip.content() }
         }
     }
 
     return onPointerEvent(PointerEventType.Move) { onHover(it.position) }
-        .onPointerEvent(PointerEventType.Exit) { tooltipState.onHover(null) }
+        .onPointerEvent(PointerEventType.Exit) { tooltipState.clear() }
 }
 
 @Composable
@@ -110,6 +116,7 @@ private data class TooltipState(private val scope: CoroutineScope) {
     private var currentHover: Tooltip? = null
     private var job: Job? = null
 
+    fun clear() = onHover(null)
     fun onHover(tooltip: Tooltip?) {
         if (currentHover == tooltip) return
         job?.cancel()

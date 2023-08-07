@@ -25,10 +25,7 @@ fun Theme(
     content: Content
 ) {
     MaterialTheme(colors, typography, shapes) {
-        CompositionLocalProvider(
-            LocalContentColor provides colors.onSurface,
-            LocalTextStyle provides LocalTextStyle.current.copy(color = colors.onSurface),
-        ) {
+        CompositionLocalProvider(LocalContentColor provides colors.onSurface) {
             content()
         }
     }
