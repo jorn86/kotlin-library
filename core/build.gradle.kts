@@ -6,12 +6,10 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(17)
     jvm {
         compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-                freeCompilerArgs += "-Xjvm-default=all" // allow MagicMap to handle default methods
-            }
+            kotlinOptions.freeCompilerArgs += "-Xjvm-default=all" // allow MagicMap to handle default methods
         }
         withJava()
         testRuns["test"].executionTask.configure {

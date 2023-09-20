@@ -5,8 +5,8 @@ import androidx.compose.foundation.TooltipArea
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +27,7 @@ fun TooltipText(
 
 @Composable
 fun tooltipModifier(
-    backgroundColor: Color = MaterialTheme.colors.background,
-    borderColor: Color = MaterialTheme.colors.onBackground,
+    backgroundColor: Color = MaterialTheme.colorScheme.background,
+    borderColor: Color = MaterialTheme.colorScheme.onBackground,
     padding: Dp = 3.dp,
 ) = Modifier.background(backgroundColor).border(1.dp, borderColor).padding(padding)

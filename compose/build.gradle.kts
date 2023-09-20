@@ -4,10 +4,8 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(17)
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "17"
-        }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
@@ -25,7 +23,6 @@ kotlin {
 
                 api(compose.runtime)
                 api(compose.foundation)
-                api(compose.material)
                 api(compose.material3)
                 api(compose.materialIconsExtended)
             }
@@ -37,7 +34,6 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                api(compose.materialIconsExtended)
             }
         }
         val jvmTest by getting

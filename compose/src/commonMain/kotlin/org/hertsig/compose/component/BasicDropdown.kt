@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,7 +29,7 @@ fun <V> BasicDropdown(
     Row {
         BasicTextField(display(value), {},
             modifier.border(1.dp, Color.Black).padding(2.dp).clickable { show = true },
-            textStyle = TextStyle(textAlign = textAlign),
+            textStyle = LocalTextStyle.current.copy(textAlign = textAlign),
             // enabled = false is required to make clickable work (???)
             enabled = false, readOnly = true, singleLine = true, maxLines = 1)
         DropdownMenu(showState, values, display, itemAlign) { value = it; show = false; onUpdate(it) }

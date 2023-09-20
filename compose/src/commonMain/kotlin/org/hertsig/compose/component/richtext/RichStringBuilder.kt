@@ -3,8 +3,8 @@ package org.hertsig.compose.component.richtext
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalTextStyle
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -53,7 +53,7 @@ open class RichStringBuilder {
         return this
     }
 
-    @Composable
+    @Composable // FIXME can't use composable inside Builder
     fun inline(
         id: String,
         width: TextUnit,
@@ -66,7 +66,7 @@ open class RichStringBuilder {
         return this
     }
 
-    @Composable
+    @Composable // FIXME can't use composable inside Builder
     fun icon(
         icon: Painter,
         size: DpSize,
@@ -96,7 +96,7 @@ open class RichStringBuilder {
         return this
     }
 
-    fun tooltipText(text: String, id: String, style: SpanStyle = SpanStyle(), tooltip: Tooltip) =
+    fun textWithTooltip(text: String, id: String, tooltip: Tooltip, style: SpanStyle = SpanStyle()) =
         withTooltip(id, tooltip) { append(text, style) }
 
     fun build() = RichString(builder.build(), inline, clickables, tooltips)

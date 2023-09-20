@@ -4,6 +4,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -27,7 +28,7 @@ fun Autocompleter(
         BasicTextField(
             value, { value = it; results = complete(it) },
             modifier.border(1.dp, Color.Black).padding(2.dp),
-            textStyle = TextStyle(textAlign = textAlign),
+            textStyle = LocalTextStyle.current.copy(textAlign = textAlign),
             singleLine = true, maxLines = 1
         ) { innerTextField ->
             if (hint != null && value.isEmpty()) {

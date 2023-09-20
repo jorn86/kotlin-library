@@ -1,15 +1,15 @@
 package org.hertsig.compose.component
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import org.hertsig.compose.Content
 
 @Composable
 fun Theme(
-    lightColors: Colors = lightColors(),
-    darkColors: Colors = darkColors(),
+    lightColors: ColorScheme = lightColorScheme(),
+    darkColors: ColorScheme = darkColorScheme(),
     typography: Typography = Typography(),
     shapes: Shapes = Shapes(),
     content: Content
@@ -19,14 +19,14 @@ fun Theme(
 
 @Composable
 fun Theme(
-    colors: Colors = lightColors(),
+    colors: ColorScheme = lightColorScheme(),
     typography: Typography = Typography(),
     shapes: Shapes = Shapes(),
     content: Content
 ) {
-    MaterialTheme(colors, typography, shapes) {
-        CompositionLocalProvider(LocalContentColor provides colors.onSurface) {
-            content()
-        }
+    MaterialTheme(colors, shapes, typography) {
+        content()
+//        CompositionLocalProvider(LocalContentColor provides colors.onSurface) {
+//        }
     }
 }

@@ -3,9 +3,10 @@ package org.hertsig.compose.component
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonColors
-import androidx.compose.material.ButtonDefaults
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,5 +20,5 @@ fun SmallButton(
     padding: PaddingValues = PaddingValues(8.dp, 4.dp),
     content: @Composable RowScope.() -> Unit,
 ) {
-    Button(onClick, modifier.heightIn(1.dp), enabled, colors = colors, contentPadding = padding, content = content)
+    Button(onClick, modifier.heightIn(1.dp), enabled, RoundedCornerShape(4.dp), colors = colors, contentPadding = padding, content = content)
 }
