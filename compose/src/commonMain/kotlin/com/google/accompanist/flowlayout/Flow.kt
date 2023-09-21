@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.unit.*
-import org.hertsig.compose.Content
+import org.hertsig.compose.util.Content
 import kotlin.math.max
 
 /**

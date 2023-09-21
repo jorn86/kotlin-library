@@ -4,10 +4,10 @@ import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.ui.text.AnnotatedString
 
 open class RichString internal constructor(
-    val annotatedString: AnnotatedString,
-    val inlineContent: Map<String, InlineTextContent>,
-    val clickables: Map<String, () -> Unit>,
-    val tooltips: Map<String, Tooltip>,
+    internal val annotatedString: AnnotatedString,
+    internal val inlineContent: Map<String, InlineTextContent>,
+    internal val clickables: Map<String, () -> Unit>,
+    internal val tooltips: Map<String, Tooltip>,
 ) {
     override fun toString() = "RichString[$annotatedString]"
 }

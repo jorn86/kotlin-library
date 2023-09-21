@@ -8,7 +8,7 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import org.hertsig.compose.Content
+import org.hertsig.compose.util.Content
 import org.hertsig.compose.component.ScrollableColumn
 
 @Composable

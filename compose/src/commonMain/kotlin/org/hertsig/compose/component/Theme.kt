@@ -4,7 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import org.hertsig.compose.Content
+import org.hertsig.compose.util.Content
 
 @Composable
 fun Theme(
@@ -17,6 +17,7 @@ fun Theme(
     Theme(if (isSystemInDarkTheme()) darkColors else lightColors, typography, shapes, content)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Theme(
     colors: ColorScheme = lightColorScheme(),
@@ -25,8 +26,8 @@ fun Theme(
     content: Content
 ) {
     MaterialTheme(colors, shapes, typography) {
-        content()
-//        CompositionLocalProvider(LocalContentColor provides colors.onSurface) {
-//        }
+        CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+            content()
+        }
     }
 }

@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SpacedRow(
+inline fun SpacedRow(
     modifier: Modifier = Modifier,
     spacing: Dp = 4.dp,
     horizontal: Alignment.Horizontal = Alignment.Start,
@@ -19,7 +19,7 @@ fun SpacedRow(
 }
 
 @Composable
-fun SpacedColumn(
+inline fun SpacedColumn(
     modifier: Modifier = Modifier,
     spacing: Dp = 4.dp,
     vertical: Alignment.Vertical = Alignment.Top,

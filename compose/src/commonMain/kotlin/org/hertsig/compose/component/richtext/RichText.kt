@@ -17,8 +17,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.hertsig.compose.build
-import org.hertsig.compose.pointerInputAsync
+import org.hertsig.compose.util.build
+import org.hertsig.compose.util.pointerInputAsync
 
 @Composable
 fun RichText(
@@ -131,7 +131,7 @@ private data class TooltipState(private val scope: CoroutineScope) {
 private fun MultiParagraph.containsWithinBounds(positionOffset: Offset): Boolean =
     positionOffset.let { (x, y) -> x > 0 && y >= 0 && x <= width && y <= height }
 
-private fun AnnotatedString.copyWith(additions: AnnotatedString.Builder.() -> Unit) = copy().also(additions).build()
+private fun AnnotatedString.copyWith(additions: AnnotatedString.Builder.() -> Unit) = copy().also(additions).toAnnotatedString()
 
 @OptIn(ExperimentalTextApi::class)
 private fun AnnotatedString.copy(): AnnotatedString.Builder {

@@ -2,7 +2,7 @@ package org.hertsig.compose.component.richtext
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.PopupPositionProvider
-import org.hertsig.compose.Content
+import org.hertsig.compose.util.Content
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 

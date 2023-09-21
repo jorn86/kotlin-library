@@ -32,10 +32,7 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val jvmMain by getting {
-            dependencies {
-            }
-        }
+        val jvmMain by getting
         val jvmTest by getting
     }
 }

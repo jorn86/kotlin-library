@@ -15,12 +15,13 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ScrollableColumn(
     modifier: Modifier = Modifier,
+    boxModifier: Modifier = Modifier,
     arrangement: Arrangement.Vertical = Arrangement.Top,
     padding: PaddingValues = PaddingValues(8.dp, 8.dp, 12.dp, 8.dp),
     state: LazyListState = rememberLazyListState(),
     content: LazyListScope.() -> Unit
 ) {
-    Box {
+    Box(boxModifier) {
         LazyColumn(modifier, state, padding, verticalArrangement = arrangement, content = content)
         VerticalScrollbar(rememberScrollbarAdapter(state), Modifier.align(Alignment.CenterEnd))
     }
@@ -29,12 +30,13 @@ fun ScrollableColumn(
 @Composable
 fun ScrollableRow(
     modifier: Modifier = Modifier,
+    boxModifier: Modifier = Modifier,
     arrangement: Arrangement.Horizontal = Arrangement.Start,
-    padding: PaddingValues = PaddingValues(0.dp),
+    padding: PaddingValues = PaddingValues(8.dp, 8.dp, 8.dp, 12.dp),
     state: LazyListState = rememberLazyListState(),
     content: LazyListScope.() -> Unit
 ) {
-    Box {
+    Box(boxModifier) {
         LazyRow(modifier, state, padding, horizontalArrangement = arrangement, content = content)
         HorizontalScrollbar(rememberScrollbarAdapter(state), Modifier.align(Alignment.BottomCenter))
     }

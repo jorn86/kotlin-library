@@ -26,6 +26,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlin("reflect"))
+                api("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
             }
         }
         val commonTest by getting {
@@ -36,11 +38,16 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 api("org.slf4j:slf4j-api:2.0.6")
-                implementation("com.google.guava:guava:32.1.1-jre")
-                implementation("com.github.ben-manes.caffeine:caffeine:3.1.5")
+                api("com.google.guava:guava:32.1.1-jre")
+                api("com.github.ben-manes.caffeine:caffeine:3.1.5")
             }
         }
         val jvmTest by getting
+//        val wasmMain by getting {
+//            dependencies {
+//                implementation(npm("@js-joda/timezone", "2.3.0"))
+//            }
+//        }
     }
 }
 

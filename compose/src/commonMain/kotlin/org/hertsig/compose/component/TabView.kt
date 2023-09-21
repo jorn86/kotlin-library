@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import org.hertsig.compose.Content
+import org.hertsig.compose.util.Content
 
 data class TabBuilder(
     val title: Content,

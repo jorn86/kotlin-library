@@ -12,9 +12,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.TextUnit
-import org.hertsig.compose.*
+import org.hertsig.compose.util.*
 import org.hertsig.util.putFirst
 
 val LINK_STYLE = SpanStyle(Color.Blue, textDecoration = TextDecoration.Underline)
@@ -27,7 +28,8 @@ fun rememberRichString(vararg keys: Any, builder: RichStringBuilder.() -> Unit) 
 }
 
 @OptIn(ExperimentalTextApi::class)
-open class RichStringBuilder {
+open class RichStringBuilder
+internal constructor() {
     private val builder = AnnotatedString.Builder()
     private val inline = mutableMapOf<String, InlineTextContent>()
     private val clickables = mutableMapOf<String, () -> Unit>()
@@ -39,7 +41,7 @@ open class RichStringBuilder {
     }
 
     fun append(text: String, style: SpanStyle): RichStringBuilder {
-        builder.append(text, style)
+        builder.withStyle(style) { append(text) }
         return this
     }
 
@@ -53,27 +55,26 @@ open class RichStringBuilder {
         return this
     }
 
-    @Composable // FIXME can't use composable inside Builder
     fun inline(
         id: String,
         width: TextUnit,
-        height: TextUnit = LocalTextStyle.current.fontSize,
+        height: TextUnit, // LocalTextStyle.current.fontSize
         align: PlaceholderVerticalAlign = PlaceholderVerticalAlign.AboveBaseline,
         content: Content,
     ): RichStringBuilder {
-        inline.putFirst(id, inlineText(width, height, align) { content() })
+        inline.putFirst(id, InlineTextContent(Placeholder(width, height, align)) { content() })
         builder.appendInlineContent(id)
         return this
     }
 
-    @Composable // FIXME can't use composable inside Builder
     fun icon(
         icon: Painter,
         size: DpSize,
+        density: Density, // LocalDensity.current
         id: String,
         modifier: Modifier = Modifier,
         description: String = id,
-    ) = inline(id, size.width.dpToSp(), size.height.dpToSp(), PlaceholderVerticalAlign.Center) {
+    ) = inline(id, size.width.dpToSp(density), size.height.dpToSp(density), PlaceholderVerticalAlign.Center) {
         Icon(icon, description, Modifier.size(size).then(modifier))
     }
 
@@ -99,7 +100,7 @@ open class RichStringBuilder {
     fun textWithTooltip(text: String, id: String, tooltip: Tooltip, style: SpanStyle = SpanStyle()) =
         withTooltip(id, tooltip) { append(text, style) }
 
-    fun build() = RichString(builder.build(), inline, clickables, tooltips)
+    fun build() = RichString(builder.toAnnotatedString(), inline, clickables, tooltips)
 }
 
 // FIXME convert back to default parameter once that doesn't crash the compiler

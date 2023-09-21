@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -19,9 +20,7 @@ fun IconButton(
     iconSize: Dp = 24.dp,
     description: String = icon.name,
 ) {
-    MaterialIconButton(onClick, buttonModifier, enabled) {
-        Icon(icon, description, Modifier.size(iconSize))
-    }
+    IconButton(onClick, rememberVectorPainter(icon), description, buttonModifier, enabled, iconSize)
 }
 
 @Composable
@@ -33,7 +32,7 @@ fun IconButton(
     enabled: Boolean = true,
     iconSize: Dp = 24.dp,
 ) {
-    MaterialIconButton(onClick, buttonModifier, enabled) {
+    MaterialIconButton(onClick, buttonModifier.size(iconSize), enabled) { // TODO explicit size shouldn't be needed, see if there's a cleaner solution
         Icon(icon, description, Modifier.size(iconSize))
     }
 }
