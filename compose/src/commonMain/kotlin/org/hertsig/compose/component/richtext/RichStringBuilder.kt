@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -15,7 +14,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.TextUnit
-import org.hertsig.compose.util.*
+import org.hertsig.compose.util.Content
+import org.hertsig.compose.util.dpToSp
 import org.hertsig.util.putFirst
 
 val LINK_STYLE = SpanStyle(Color.Blue, textDecoration = TextDecoration.Underline)

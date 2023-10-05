@@ -2,7 +2,6 @@ package org.hertsig.util
 
 import com.google.common.collect.Ordering
 import java.util.*
-import kotlin.Comparator
 
 inline fun <reified E:Enum<E>> enumSetOf(vararg values: E): EnumSet<E> {
     val set = EnumSet.noneOf(E::class.java)

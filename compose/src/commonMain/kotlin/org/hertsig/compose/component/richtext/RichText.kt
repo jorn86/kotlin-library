@@ -17,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.hertsig.compose.util.build
 import org.hertsig.compose.util.pointerInputAsync
 
 @Composable

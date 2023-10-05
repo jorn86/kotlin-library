@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import org.hertsig.util.set
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.ExperimentalTime
 
 class WindowTicker<T: Comparable<T>>(
     private val ticker: Ticker<T>,
@@ -21,6 +22,7 @@ class WindowTicker<T: Comparable<T>>(
     }
 
     companion object {
+        @OptIn(ExperimentalTime::class)
         fun create(ticker: KotlinTicker, window: Duration = 1.seconds) =
             WindowTicker(ticker) { it + window }
     }

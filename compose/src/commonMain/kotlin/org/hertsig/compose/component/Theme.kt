@@ -12,7 +12,7 @@ fun Theme(
     darkColors: ColorScheme = darkColorScheme(),
     typography: Typography = Typography(),
     shapes: Shapes = Shapes(),
-    content: Content
+    content: Content,
 ) {
     Theme(if (isSystemInDarkTheme()) darkColors else lightColors, typography, shapes, content)
 }
@@ -23,10 +23,14 @@ fun Theme(
     colors: ColorScheme = lightColorScheme(),
     typography: Typography = Typography(),
     shapes: Shapes = Shapes(),
-    content: Content
+    content: Content,
 ) {
     MaterialTheme(colors, shapes, typography) {
-        CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+        CompositionLocalProvider(
+            LocalMinimumInteractiveComponentEnforcement provides false,
+            // Why doesn't MaterialTheme do this automatically? It just keeps the default of Color.Black
+            LocalContentColor provides MaterialTheme.colorScheme.onSurface,
+        ) {
             content()
         }
     }

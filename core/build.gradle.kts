@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-
 plugins {
     kotlin("multiplatform")
 }
@@ -17,10 +14,10 @@ kotlin {
         }
     }
 
-    @OptIn(ExperimentalWasmDsl::class)
-    wasm {
-        browser()
-    }
+//    @OptIn(ExperimentalWasmDsl::class)
+//    wasm {
+//        browser()
+//    }
 
     sourceSets {
         val commonMain by getting {
@@ -52,4 +49,4 @@ kotlin {
 }
 
 // Use a proper version of webpack, TODO remove after updating to Kotlin 1.9.
-rootProject.the<NodeJsRootExtension>().versions.webpack.version = "5.76.2"
+//rootProject.the<NodeJsRootExtension>().versions.webpack.version = "5.76.2"

@@ -4,10 +4,12 @@ import org.hertsig.logger.logger
 import kotlin.time.ComparableTimeMark
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.ExperimentalTime
 import kotlin.time.TimeSource
 
 private val log = logger {}
 
+@OptIn(ExperimentalTime::class)
 class KotlinTicker(
     private val tickDuration: Duration,
     private val timer: TimeSource.WithComparableMarks = TimeSource.Monotonic
