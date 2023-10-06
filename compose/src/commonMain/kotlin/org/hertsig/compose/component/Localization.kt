@@ -46,6 +46,14 @@ data class StringResourceKey(val key: String): ResourceKey
 data class PluralResourceKey(val baseKey: String): ResourceKey
 data class FallbackResourceKey(val keys: List<ResourceKey>): ResourceKey {
     constructor(vararg keys: ResourceKey) : this(keys.toList())
+
+    companion object {
+        fun create(keys: List<ResourceKey>) = when (keys.size) {
+            0 -> throw IllegalArgumentException("No keys given")
+            1 -> keys.single()
+            else -> FallbackResourceKey(keys)
+        }
+    }
 }
 data class ResourceKeyWithArguments(val key: ResourceKey, val arguments: Array<out Any>): ResourceKey {
     constructor(key: String, vararg arguments: Any) : this(StringResourceKey(key), arguments)

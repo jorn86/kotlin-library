@@ -19,7 +19,7 @@ open class RichStringBuilderWithResources
 internal constructor(private val resourceResolver: ResourceResolver): RichStringBuilder() {
     fun append(key: ResourceKey, vararg arguments: Any) = append(resolve(key, arguments))
     fun append(style: SpanStyle, key: ResourceKey, vararg arguments: Any) = append(resolve(key, arguments), style)
-    fun appendIfNotBlank(key: ResourceKey, extra: String, vararg arguments: Any): RichStringBuilder {
+    fun appendIfNotBlank(key: ResourceKey, extra: String = "", vararg arguments: Any): RichStringBuilder {
         val resource = resolve(key, arguments)
         if (resource.isNotBlank()) append("$resource$extra")
         return this
