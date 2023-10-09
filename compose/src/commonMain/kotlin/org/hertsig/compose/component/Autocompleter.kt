@@ -13,6 +13,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
+import androidx.compose.material3.DropdownMenu as MaterialDropdownMenu
 
 @Composable
 fun Autocompleter(
@@ -37,7 +38,7 @@ fun Autocompleter(
             }
             innerTextField()
         }
-        androidx.compose.material3.DropdownMenu(results.isNotEmpty(), { results = emptyList() }, properties = PopupProperties(focusable = false)) {
+        MaterialDropdownMenu(results.isNotEmpty(), { results = emptyList() }, properties = PopupProperties(focusable = false)) {
             results.forEach { Item((it), itemAlign) { onSelect(it); value = ""; results = emptyList() } }
         }
     }
