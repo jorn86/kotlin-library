@@ -2,8 +2,10 @@ package org.hertsig.compose.component
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -19,8 +21,9 @@ fun IconButton(
     enabled: Boolean = true,
     iconSize: Dp = 24.dp,
     description: String = icon.name,
+    tint: Color = LocalContentColor.current,
 ) {
-    IconButton(onClick, rememberVectorPainter(icon), description, buttonModifier, enabled, iconSize)
+    IconButton(onClick, rememberVectorPainter(icon), description, buttonModifier, enabled, iconSize, tint)
 }
 
 @Composable
@@ -31,8 +34,9 @@ fun IconButton(
     buttonModifier: Modifier = Modifier,
     enabled: Boolean = true,
     iconSize: Dp = 24.dp,
+    tint: Color = LocalContentColor.current,
 ) {
     MaterialIconButton(onClick, buttonModifier.size(iconSize), enabled) { // TODO explicit size shouldn't be needed, see if there's a cleaner solution
-        Icon(icon, description, Modifier.size(iconSize))
+        Icon(icon, description, Modifier.size(iconSize), tint)
     }
 }

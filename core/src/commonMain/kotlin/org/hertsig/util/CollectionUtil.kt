@@ -18,8 +18,9 @@ fun <T,K> Collection<T>.distinctByKeepLast(selector: (T) -> K): Collection<T> {
 }
 
 /** As subList but with sensible defaults and supports Python-style "all except" for the end parameter */
-fun <T> List<T>.sub(start: Int = 0, end: Int = size) = subList(start, if (end < 0) end + size else end)
+fun <T> List<T>.slice(start: Int = 0, end: Int = size) = subList(start, if (end < 0) end + size else end)
 
 fun <T> MutableCollection<in T>.add(vararg elements: T) = addAll(elements)
 
 fun <T> Collection<T>.containsAny(elements: Collection<T>) = elements.any { it in this }
+fun <T> Collection<T>.containsAny(vararg elements: T) = elements.any { it in this }

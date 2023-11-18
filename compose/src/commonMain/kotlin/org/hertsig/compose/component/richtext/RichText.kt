@@ -76,7 +76,7 @@ private fun Modifier.clickablesPointerInput(
     val annotation = getAnnotationFromCursorPosition(CLICKABLE_TAG, it.position)
     val hoveredRange = if (annotation == null) IntRange.EMPTY else IntRange(annotation.start, annotation.end)
     onHoverClickable(hoveredRange)
-}
+}.onPointerEvent(PointerEventType.Exit) { onHoverClickable(IntRange.EMPTY) }
 
 @Composable
 @OptIn(ExperimentalComposeUiApi::class)

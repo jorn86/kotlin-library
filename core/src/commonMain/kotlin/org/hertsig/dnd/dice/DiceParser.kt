@@ -47,6 +47,10 @@ fun parse(string: String): MultiDice {
                     }
                     sign = null
                 }
+                is DieToken.Minus -> {
+                    check(total == MultiDice(Dice.NONE)) { "Unary minus only allowed at the very start, but already have $total" }
+                    sign = DieToken.Minus
+                }
                 else -> error("Expected dice or modifier token, but got $token")
             }
         }
